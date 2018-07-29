@@ -2,6 +2,7 @@ export default class Books {
     constructor(config, scene) {
         this.config = config;
         this.scene = scene;
+        this.running = true;
         this.bookToFireTimeMs = 5000;
         this.maxBookCreationPeriodMs = 6000;
         this.bookGroup = this.scene.add.group();
@@ -19,8 +20,10 @@ export default class Books {
         this.scene.time.addEvent({
             delay: delay,
             callback: () => {
-                this.addBook();
-                this.createBookAfterDelay(Phaser.Math.Between(500, this.maxBookCreationPeriodMs));
+                if (this.running) {
+                    this.addBook();
+                    this.createBookAfterDelay(Phaser.Math.Between(500, this.maxBookCreationPeriodMs));
+                }
             },
             callbackScope: this,
         });
@@ -103,5 +106,8 @@ export default class Books {
         });
     }
 
+    stop() {
+        this.running = false;
+    }
 }
 

@@ -23,6 +23,13 @@ export default class Text {
     addBurned() {
         ++this.numBurned;
         this.update();
+        if (this.burnedChangeListener) {
+            this.burnedChangeListener(this.numBurned);
+        }
+    }
+
+    setBurnedChangeListener(listener) {
+        this.burnedChangeListener = listener;
     }
 
     update() {

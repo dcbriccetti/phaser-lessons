@@ -12,6 +12,7 @@ class MainScene extends Phaser.Scene {
             ["Children",    ["childbook1.png", "childbook2.png"]],
             ["Adult",       ["book.png"]],
         ];
+        this.maxBurnedBooks = 10;
         this.carts = new Carts(game.config, this);
         this.books = new Books(game.config, this);
         this.text = new Text(game.config, this);
@@ -29,6 +30,13 @@ class MainScene extends Phaser.Scene {
                 this.books.sort(this.carts.cartSprites[keyNum - 1]);
         });
         this.fire.create();
+        this.text.setBurnedChangeListener(numBurned => {
+            this.fire.setAmbientVolume(numBurned / this.maxBurnedBooks)
+            if (numBurned >= this.maxBurnedBooks) {
+                this.fire.consume();
+                this.books.stop();
+            }
+        });
     }
 
     createBackground() {
