@@ -9,8 +9,8 @@ class MainScene extends Phaser.Scene {
     preload() {
         this.fire = new Fire(game.config, this);
         this.bookInfos = [
-            ["Children",    ["childbook1.png", "childbook2.png"]],
-            ["Adult",       ["book.png"]],
+            ["Children",    "childbooks.png", 150, 187],
+            ["Adult",       "adultbooks.png", 132, 200],
         ];
         this.maxBurnedBooks = 10;
         this.carts = new Carts(game.config, this);

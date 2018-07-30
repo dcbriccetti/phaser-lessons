@@ -10,9 +10,7 @@ export default class Books {
         this.createSpeedupEvent();
 
         for (let bookInfo of scene.bookInfos) {
-            bookInfo[1].forEach((filename, index) => {
-                scene.load.image(bookInfo[0] + index, `assets/${filename}`);
-            });
+            scene.load.spritesheet(bookInfo[0], `assets/${bookInfo[1]}`, {frameWidth: bookInfo[2], frameHeight: bookInfo[3]});
         }
     }
 
@@ -44,12 +42,12 @@ export default class Books {
 
     addBook() {
         const bookInfo = this.scene.bookInfos[Phaser.Math.Between(0, this.scene.bookInfos.length - 1)];
-        const category = bookInfo[0];
-        const bookKey = category + Phaser.Math.Between(0, bookInfo[1].length - 1);
+        const bookKey = bookInfo[0];
         const book = this.scene.add.sprite(this.scene.xPos(0), -50, bookKey);
-        book.bookCategory = category;
+        book.setFrame(Phaser.Math.Between(0, book.texture.frameTotal - 1));
+        book.bookCategory = bookKey;
         this.bookGroup.add(book);
-        book.setScale(0.35);
+        book.setScale(2 / 3);
         book.movementTween = this.scene.tweens.add({
             targets: [book],
             x: this.scene.fire.fireSprite.x,
