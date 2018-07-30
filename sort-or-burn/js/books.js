@@ -1,6 +1,5 @@
 export default class Books {
-    constructor(config, scene) {
-        this.config = config;
+    constructor(scene) {
         this.scene = scene;
         this.running = true;
         this.bookToFireTimeMs = 5000;
@@ -44,7 +43,8 @@ export default class Books {
         const bookInfo = this.scene.bookInfos[Phaser.Math.Between(0, this.scene.bookInfos.length - 1)];
         const bookKey = bookInfo[0];
         const book = this.scene.add.sprite(this.scene.xPos(0), -50, bookKey);
-        book.setFrame(Phaser.Math.Between(0, book.texture.frameTotal - 1));
+        const frameIndex = Phaser.Math.Between(0, book.texture.frameTotal - 2);  // Todo find why frameTotal is 1 too high
+        book.setFrame(frameIndex);
         book.bookCategory = bookKey;
         this.bookGroup.add(book);
         book.setScale(2 / 3);
@@ -62,7 +62,7 @@ export default class Books {
 
     getFirst() { return this.bookGroup.getFirstAlive(); }
 
-    sort(cart) {
+    selectCart(cart) {
         const book = this.getFirst();
         if (! book) return;
 

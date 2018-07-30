@@ -1,12 +1,12 @@
 export default class Carts {
-    constructor(config, scene) {
-        this.config = config;
+    constructor(height, scene) {
+        this.height = height;
         this.scene = scene;
         scene.load.image("cart", "assets/cart.png");
     }
 
     create() {
-        const h = this.config.height;
+        const h = this.height;
         this.cartSprites = [];
         this.scene.bookInfos.forEach((bookInfo, index) => {
             const xCart = this.scene.xPos(index + 1);

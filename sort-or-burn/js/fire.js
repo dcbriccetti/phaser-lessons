@@ -1,6 +1,7 @@
 export default class Fire {
-    constructor(config, scene) {
-        this.config = config;
+    constructor(width, height, scene) {
+        this.width = width;
+        this.height = height;
         this.scene = scene;
         scene.load.image('fire', 'assets/fire.jpg');
         scene.load.audio('fire', 'assets/fire.wav');
@@ -10,7 +11,7 @@ export default class Fire {
     create() {
         this.fireSprite = this.scene.add.sprite(this.scene.xPos(0), 0, 'fire');
         this.fireSprite.setScale(0.45);
-        this.fireSprite.setY(this.config.height - this.fireSprite.displayHeight / 2);
+        this.fireSprite.setY(this.height - this.fireSprite.displayHeight / 2);
         this.fireSound = this.scene.sound.add('fire', {loop: true});
         this.setAmbientVolume(0);
         this.fireSound.play();
@@ -32,8 +33,8 @@ export default class Fire {
             this.scene.tweens.add({targets: [this.fireSprite],
                 scaleX: 3, scaleY: 3,
                 alpha: 0.5,
-                x: this.config.width / 2,
-                y: this.config.height / 2,
+                x: this.width / 2,
+                y: this.height / 2,
                 duration: 1000});
         }
     }
