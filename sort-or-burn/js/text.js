@@ -36,6 +36,7 @@ export default class Text {
 
     setLevel(level) {
         this.level = level;
+        this.update();
     }
 
     update() {
