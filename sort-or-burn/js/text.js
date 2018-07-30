@@ -3,16 +3,18 @@ export default class Text {
         this.width = width;
         this.scene = scene;
         this.numSorted = this.numBurned = 0;
+        this.level = 1;
     }
 
     create() {
         const textLeft = this.width / 2;
         this.scene.add.text(textLeft, 50, "Sort or Burn", {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
         this.scene.add.text(textLeft, 120,
-            "Rescue library books by sorting them\nbefore they burn. Use mouse/touch\nor number keys.",
+            "Save library books by sorting them\nbefore they burn. Use mouse/touch\nor number keys.",
             {font: "20px sans-serif", color: "black"}).setOrigin(0, 0.5);
-        this.sortedText = this.scene.add.text(textLeft, 200, "",
+        this.sortedText = this.scene.add.text(textLeft, 220, "",
             {font: "30px sans-serif", color: "black"}).setOrigin(0, 0.5);
+        this.update();
     }
 
     addSorted() {
@@ -32,8 +34,12 @@ export default class Text {
         this.burnedChangeListener = listener;
     }
 
+    setLevel(level) {
+        this.level = level;
+    }
+
     update() {
-        this.sortedText.setText(`Sorted: ${this.numSorted}\nBurned: ${this.numBurned}`);
+        this.sortedText.setText(`Level: ${this.level}\nSaved: ${this.numSorted}\nBurned: ${this.numBurned}`);
     }
 
 }

@@ -6,7 +6,7 @@ export default class Books {
         this.maxBookCreationPeriodMs = 6000;
         this.bookGroup = this.scene.add.group();
         this.createBookAfterDelay(1000);
-        this.createSpeedupEvent();
+        this.setLevel(1);
 
         for (let bookInfo of scene.bookInfos) {
             scene.load.spritesheet(bookInfo[0], `assets/${bookInfo[1]}`, {frameWidth: bookInfo[2], frameHeight: bookInfo[3]});
@@ -26,17 +26,9 @@ export default class Books {
         });
     }
 
-    createSpeedupEvent() {
-        this.scene.time.addEvent({
-            delay: 10000,
-            loop: true,
-            callback: () => {
-                if (this.bookToFireTimeMs >= 1000)
-                    this.bookToFireTimeMs -= 500;
-                if (this.maxBookCreationPeriodMs >= 1000)
-                    this.maxBookCreationPeriodMs -= 500;
-            },
-        });
+    setLevel(level) {
+        this.bookToFireTimeMs = 500 + 5000 - Math.min(5000, 500 * level);
+        this.maxBookCreationPeriodMs = 1000 + 4000 - Math.min(4000, 400 * level);
     }
 
     addBook() {
@@ -98,7 +90,7 @@ export default class Books {
         this.scene.tweens.add({
             targets: [book], alpha: 0, duration: 500,
             onComplete: tween => {
-                book.destroy()
+                book.destroy();
                 this.scene.text.addBurned();
             }
         });

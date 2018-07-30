@@ -14,6 +14,7 @@ class MainScene extends Phaser.Scene {
             ["Adult",       "adultbooks.png", 132, 200],
         ];
         this.maxBurnedBooks = 10;
+        this.level = 1;
         this.carts = new Carts(cfg.height, this);
         this.books = new Books(this);
         this.text = new Text(cfg.width, this);
@@ -30,10 +31,21 @@ class MainScene extends Phaser.Scene {
                 this.books.selectCart(this.carts.cartSprites[keyNum - 1]);
         });
         this.text.setBurnedChangeListener(numBurned => {
-            this.fire.setAmbientVolume(numBurned / this.maxBurnedBooks)
+            this.fire.setAmbientVolume(numBurned / this.maxBurnedBooks);
             if (numBurned >= this.maxBurnedBooks) {
                 this.fire.consume();
                 this.books.stop();
+            }
+        });
+        this.time.addEvent({
+            delay: 10000,
+            loop: true,
+            callback: () => {
+                if (this.level < 10) {
+                    ++this.level;
+                    this.text.setLevel(this.level);
+                    this.books.setLevel(this.level);
+                }
             }
         });
     }
