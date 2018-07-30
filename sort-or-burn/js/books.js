@@ -42,7 +42,8 @@ export default class Books {
 
     /** Adds a randomly-chosen book from a randomly-chosen category and starts it moving toward the fire */
     addBook() {
-        const bookKey = this.scene.bookInfos[Phaser.Math.Between(0, this.scene.bookInfos.length - 1)][0];
+        const bookInfos = this.scene.bookInfoSubset();
+        const bookKey = bookInfos[Phaser.Math.Between(0, bookInfos.length - 1)][0];
         const book = this.scene.add.sprite(this.scene.xPos(0), -50, bookKey);
         const frameIndex = Phaser.Math.Between(0, book.texture.frameTotal - 1 - 1);  // Ignore the base frame
         book.setFrame(frameIndex);

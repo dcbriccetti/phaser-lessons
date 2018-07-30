@@ -32,7 +32,7 @@ class MainScene extends Phaser.Scene {
         this.input.on("pointerdown", event => this.books.selectCart(this.carts.closest(event.x, event.y)), this);
         this.input.keyboard.on('keydown', event => {
             const keyNum = parseInt(event.key);
-            if (keyNum > 0 && keyNum <= this.bookInfos.length)
+            if (keyNum > 0 && keyNum <= this.numCarts())
                 this.books.selectCart(this.carts.cartSprites[keyNum - 1]);
         });
         this.text.setBurnedChangeListener(numBurned => {
@@ -50,6 +50,7 @@ class MainScene extends Phaser.Scene {
                     ++this.level;
                     this.text.setLevel(this.level);
                     this.books.setLevel(this.level);
+                    this.carts.setNumCarts(this.numCarts());
                 }
             }
         });
@@ -65,6 +66,14 @@ class MainScene extends Phaser.Scene {
     xPos(column) {
         const cols = this.bookInfos.length + 1;
         return (game.config.width / cols) * column + (game.config.width / cols) / 2;
+    }
+
+    numCarts() {
+        return this.level < 5 ? this.level < 2 ? 1 : 2 : 3;
+    }
+
+    bookInfoSubset() {
+        return this.bookInfos.slice(0, this.numCarts());
     }
 }
 
