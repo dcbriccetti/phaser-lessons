@@ -14,8 +14,9 @@ class MainScene extends Phaser.Scene {
         const cfg = game.config;
         this.fire = new Fire(cfg.width, cfg.height, this);
         this.bookInfos = [
-            ["Children",    "childbooks.png", 150, 187],
-            ["Adult",       "adultbooks.png", 132, 200],
+            ["Children",  "childbooks.png",   150, 187],
+            ["Adult",     "adultbooks.png",   132, 200],
+            ["Spanish",   "spanishbooks.jpg", 108, 100],
         ];
         this.maxBurnedBooks = 10;
         this.level = 1;
