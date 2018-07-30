@@ -1,3 +1,6 @@
+/**
+ * Manages the fire sprite and related sounds
+ */
 export default class Fire {
     constructor(width, height, scene) {
         this.width = width;
@@ -27,14 +30,14 @@ export default class Fire {
         this.burnSound.play();
     }
 
-    consume() {
+    /** Makes the fire grow to cover the library, while reducing opacity so the score will still show */
+    consumeTheLibrary() {
         if (!this.consuming) {
             this.consuming = true;
             this.scene.tweens.add({targets: [this.fireSprite],
                 scaleX: 3, scaleY: 3,
                 alpha: 0.5,
-                x: this.width / 2,
-                y: this.height / 2,
+                x: this.width / 2, y: this.height / 2,
                 duration: 1000});
         }
     }

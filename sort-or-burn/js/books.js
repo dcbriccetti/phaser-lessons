@@ -1,16 +1,18 @@
+/** Manages the creation, movement and destruction of books. */
 export default class Books {
     constructor(scene) {
         this.scene = scene;
         this.running = true;
         this.bookToFireTimeMs = 5000;
         this.maxBookCreationPeriodMs = 6000;
-        this.bookGroup = this.scene.add.group();
+        this.incomingBooks = scene.add.group();
         this.createBookAfterDelay(1000);
         this.setLevel(1);
 
-        for (let bookInfo of scene.bookInfos) {
-            scene.load.spritesheet(bookInfo[0], `assets/${bookInfo[1]}`, {frameWidth: bookInfo[2], frameHeight: bookInfo[3]});
-        }
+        scene.bookInfos.forEach(bookInfo =>  {
+            scene.load.spritesheet(bookInfo[0], `assets/${bookInfo[1]}`,
+                {frameWidth: bookInfo[2], frameHeight: bookInfo[3]});
+        });
     }
 
     createBookAfterDelay(delay) {
@@ -22,53 +24,52 @@ export default class Books {
                     this.createBookAfterDelay(Phaser.Math.Between(500, this.maxBookCreationPeriodMs));
                 }
             },
-            callbackScope: this,
         });
     }
 
+    /** Increases book creation frequency and movement speed as the level increases */
     setLevel(level) {
-        this.bookToFireTimeMs = 500 + 5000 - Math.min(5000, 500 * level);
-        this.maxBookCreationPeriodMs = 1000 + 4000 - Math.min(4000, 400 * level);
+        function map(source, sourceMin, sourceMax, targetStart, targetEnd) {
+            const sourceRange = sourceMax - sourceMin;
+            const targetRange = targetEnd - targetStart;
+            return ((source - sourceMin) / sourceRange) * targetRange + targetStart;
+        }
+        function mapLevel(targetStart, targetStop) {return map(level, 1, 10, targetStart, targetStop);}
+
+        this.bookToFireTimeMs = mapLevel(5000, 500);
+        this.maxBookCreationPeriodMs = mapLevel(4000, 1000);
     }
 
+    /** Adds a randomly-chosen book from a randomly-chosen category and starts it moving toward the fire */
     addBook() {
-        const bookInfo = this.scene.bookInfos[Phaser.Math.Between(0, this.scene.bookInfos.length - 1)];
-        const bookKey = bookInfo[0];
+        const bookKey = this.scene.bookInfos[Phaser.Math.Between(0, this.scene.bookInfos.length - 1)][0];
         const book = this.scene.add.sprite(this.scene.xPos(0), -50, bookKey);
-        const frameIndex = Phaser.Math.Between(0, book.texture.frameTotal - 2);  // Todo find why frameTotal is 1 too high
+        const frameIndex = Phaser.Math.Between(0, book.texture.frameTotal - 1 - 1);  // Ignore the base frame
         book.setFrame(frameIndex);
-        book.bookCategory = bookKey;
-        this.bookGroup.add(book);
+        this.incomingBooks.add(book);
         book.setScale(2 / 3);
-        book.movementTween = this.scene.tweens.add({
-            targets: [book],
-            x: this.scene.fire.fireSprite.x,
-            y: this.scene.fire.fireSprite.y,
-            duration: this.bookToFireTimeMs,
-            onComplete: tween => {
-                this.bookGroup.remove(book);
-                this.burn(book);
-            }
-        });
+        book.movementTween = this.moveToFire(book, this.bookToFireTimeMs, () => this.incomingBooks.remove(book));
     }
 
-    getFirst() { return this.bookGroup.getFirstAlive(); }
-
+    /**
+     * Stops the first incoming book from its move toward the fire, and moves it to the selected cart, and
+     * then if that the wrong cart, sends it to the fire.
+     * @param cart the selected cart
+     */
     selectCart(cart) {
-        const book = this.getFirst();
+        const book = this.incomingBooks.getFirstAlive();
         if (! book) return;
 
         if (book.movementTween) {
             book.movementTween.stop();
             book.movementTween = undefined;
         }
-        this.bookGroup.remove(book);
-        book.collecting = true;
+        this.incomingBooks.remove(book);
 
         this.scene.tweens.add({
             targets: [book], x: cart.x, y: cart.y, duration: 1000,
             onComplete: tween => {
-                if (book.bookCategory === cart.cartName) {
+                if (book.texture.key === cart.cartName) {
                     this.scene.text.addSorted();
                     book.destroy();
                 } else {
@@ -78,10 +79,13 @@ export default class Books {
         });
     }
 
-    moveToFire(book) {
-        this.scene.tweens.add({
-            targets: [book], x: this.scene.fire.fireSprite.x, y: this.scene.fire.fireSprite.y, duration: 1000,
-            onComplete: tween => this.burn(book)
+    moveToFire(book, duration=1000, onComplete) {
+        return this.scene.tweens.add({
+            targets: [book], x: this.scene.fire.fireSprite.x, y: this.scene.fire.fireSprite.y, duration: duration,
+            onComplete: tween => {
+                if (onComplete) onComplete();
+                this.burn(book)
+            }
         });
     }
 
@@ -100,4 +104,3 @@ export default class Books {
         this.running = false;
     }
 }
-

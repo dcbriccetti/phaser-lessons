@@ -1,3 +1,7 @@
+/**
+ * The main part of the Sort or Burn game
+ */
+
 import Fire from './fire.js';
 import Carts from './carts.js';
 import Books from './books.js';
@@ -33,7 +37,7 @@ class MainScene extends Phaser.Scene {
         this.text.setBurnedChangeListener(numBurned => {
             this.fire.setAmbientVolume(numBurned / this.maxBurnedBooks);
             if (numBurned >= this.maxBurnedBooks) {
-                this.fire.consume();
+                this.fire.consumeTheLibrary();
                 this.books.stop();
             }
         });
