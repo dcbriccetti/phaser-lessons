@@ -10,12 +10,11 @@ export default class Carts {
         this.cartSprites = [];
         this.scene.bookInfos.forEach((bookInfo, index) => {
             const xCart = this.scene.xPos(index + 1);
-            const cartSprite = this.scene.add.sprite(xCart, h * 0.9, 'cart');
+            const cartSprite = this.scene.add.sprite(xCart, h * 0.86, 'cart');
             const cartName = bookInfo[0];
             cartSprite.cartName = cartName;
-            cartSprite.setScale(0.1);
             this.cartSprites.push(cartSprite);
-            this.scene.add.text(xCart, h * 0.98, cartName, {font: "16px sans-serif", color: "black"}).setOrigin(0.5);
+            this.scene.add.text(xCart, h * 0.985, cartName, {font: "16px sans-serif", color: "black"}).setOrigin(0.5);
         });
     }
 

@@ -10,7 +10,7 @@ export default class Fire {
 
     create() {
         this.fireSprite = this.scene.add.sprite(this.scene.xPos(0), 0, 'fire');
-        this.fireSprite.setScale(0.45);
+        this.fireSprite.setScale(0.6);
         this.fireSprite.setY(this.height - this.fireSprite.displayHeight / 2);
         this.fireSound = this.scene.sound.add('fire', {loop: true});
         this.setAmbientVolume(0);
