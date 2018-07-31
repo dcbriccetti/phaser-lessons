@@ -13,7 +13,7 @@ export default class Text {
             "Save library books by sorting them\nbefore they burn. Use mouse/touch\nor number keys.",
             {font: "20px sans-serif", color: "black"}).setOrigin(0, 0.5);
         this.sortedText = this.scene.add.text(textLeft, 220, "",
-            {font: "30px sans-serif", color: "black"}).setOrigin(0, 0.5);
+            {font: "30px monospace", color: "black"}).setOrigin(0, 0.5);
         this.update();
     }
 
@@ -40,7 +40,7 @@ export default class Text {
     }
 
     update() {
-        this.sortedText.setText(`Level: ${this.level}\nSaved: ${this.numSorted}\nBurned: ${this.numBurned}`);
+        this.sortedText.setText(`Level:  ${this.level}\nSaved:  ${this.numSorted}\nBurned: ${this.numBurned}`);
     }
 
 }
