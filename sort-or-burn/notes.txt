@@ -1,0 +1,2 @@
+The spritesheets were made with ImageMagick:
+montage *.jpg -geometry 200x150 -background transparent -tile 5x1 cats.jpg

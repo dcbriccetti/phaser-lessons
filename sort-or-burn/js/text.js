@@ -7,10 +7,10 @@ export default class Text {
     }
 
     create() {
-        const textLeft = this.width / 2;
-        this.scene.add.text(textLeft, 50, "Sort or Burn", {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
+        const textLeft = this.width / 3;
+        this.scene.add.text(textLeft, 50, "Save the Animals", {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
         this.scene.add.text(textLeft, 120,
-            "Save library books by sorting them\nbefore they burn. Use mouse/touch\nor number keys.",
+            "Save animals by sending them to the right\nteleporter before they perish. Use mouse/touch\nor number keys.",
             {font: "20px sans-serif", color: "black"}).setOrigin(0, 0.5);
         this.sortedText = this.scene.add.text(textLeft, 220, "",
             {font: "30px monospace", color: "black"}).setOrigin(0, 0.5);

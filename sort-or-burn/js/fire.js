@@ -30,8 +30,8 @@ export default class Fire {
         this.burnSound.play();
     }
 
-    /** Makes the fire grow to cover the library, while reducing opacity so the score will still show */
-    consumeTheLibrary() {
+    /** Makes the fire grow to cover the background, while reducing opacity so the score will still show */
+    consumeTheWorld() {
         if (!this.consuming) {
             this.consuming = true;
             this.scene.tweens.add({targets: [this.fireSprite],
