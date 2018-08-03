@@ -1,15 +1,17 @@
+import {config, a} from './config.js'
+
 export default class Targets {
     constructor(height, scene) {
         this.height = height;
         this.scene = scene;
-        scene.load.image("target", "assets/teleporter.png");
+        scene.load.image("target", a(config.targets.image));
     }
 
     create() {
         const h = this.height;
         this.targetSprites = [];
         this.targetTexts = [];
-        this.scene.saveeeInfos.forEach((bookInfo, index) => {
+        config.saveeeInfos.forEach((bookInfo, index) => {
             const xTarget = this.scene.xPos(index + 1);
             const targetSprite = this.scene.add.sprite(xTarget, h * 0.86, 'target');
             targetSprite.setScale(0.25);
@@ -27,6 +29,7 @@ export default class Targets {
             this.targetSprites[i].alpha = this.targetTexts[i].alpha = i >= numTargets ? 0.5 : 1;
         }
     }
+
     closest(x, y) {
         function distanceTo(targetSprite) {return Phaser.Math.Distance.Between(x, y, targetSprite.x, targetSprite.y);}
         return this.targetSprites.reduce((a, b) => distanceTo(a) < distanceTo(b) ? a : b);

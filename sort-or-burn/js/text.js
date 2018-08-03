@@ -1,46 +1,46 @@
+import {config} from './config.js'
+
 export default class Text {
     constructor(width, scene) {
         this.width = width;
         this.scene = scene;
-        this.numSorted = this.numBurned = 0;
+        this.numSaved = this.numLost = 0;
         this.level = 1;
     }
 
     create() {
         const textLeft = this.width / 3;
-        this.scene.add.text(textLeft, 50, "Save the Animals", {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
-        this.scene.add.text(textLeft, 120,
-            "Save animals by sending them to the right\nteleporter before they perish. Use mouse/touch\nor number keys.",
+        this.scene.add.text(textLeft, 50, config.title, {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
+        this.scene.add.text(textLeft, 120, config.introduction,
             {font: "20px sans-serif", color: "black"}).setOrigin(0, 0.5);
         this.sortedText = this.scene.add.text(textLeft, 220, "",
             {font: "30px monospace", color: "black"}).setOrigin(0, 0.5);
         this.update();
     }
 
+    update() {
+        this.sortedText.setText(`Level: ${this.level}\nSaved: ${this.numSaved}\nLost:  ${this.numLost}`);
+    }
+
     addSorted() {
-        ++this.numSorted;
+        ++this.numSaved;
         this.update();
     }
 
-    addBurned() {
-        ++this.numBurned;
+    addLost() {
+        ++this.numLost;
         this.update();
-        if (this.burnedChangeListener) {
-            this.burnedChangeListener(this.numBurned);
+        if (this.numLostListener) {
+            this.numLostListener(this.numLost);
         }
     }
 
-    setBurnedChangeListener(listener) {
-        this.burnedChangeListener = listener;
+    setNumLostListener(listener) {
+        this.numLostListener = listener;
     }
 
     setLevel(level) {
         this.level = level;
         this.update();
     }
-
-    update() {
-        this.sortedText.setText(`Level:  ${this.level}\nSaved:  ${this.numSorted}\nBurned: ${this.numBurned}`);
-    }
-
 }

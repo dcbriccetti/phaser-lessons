@@ -1,18 +1,16 @@
+import {config, a} from './config.js'
+
 /** Manages the creation, movement and destruction of the objects to be saved. */
 export default class Saveees {
     constructor(scene) {
         this.scene = scene;
         this.running = true;
-        this.saveeeToFireTimeMs = 5000;
-        this.maxSaveeeCreationPeriodMs = 6000;
         this.incomingSaveees = scene.add.group();
         this.createSaveeeAfterDelay(1000);
         this.setLevel(1);
 
-        scene.saveeeInfos.forEach(saveeeInfo =>  {
-            scene.load.spritesheet(saveeeInfo[0], `assets/${saveeeInfo[1]}`,
-                {frameWidth: saveeeInfo[2], frameHeight: saveeeInfo[3]});
-        });
+        config.saveeeInfos.forEach(si =>
+            scene.load.spritesheet(si[0], a(si[1]), {frameWidth: si[2], frameHeight: si[3]}));
     }
 
     createSaveeeAfterDelay(delay) {
@@ -34,13 +32,14 @@ export default class Saveees {
             const targetRange = targetEnd - targetStart;
             return ((source - sourceMin) / sourceRange) * targetRange + targetStart;
         }
-        function mapLevel(targetStart, targetStop) {return map(level, 1, 10, targetStart, targetStop);}
+        function mapLevel(targetStart, targetStop) {return map(level, 1, config.highestLevel, targetStart, targetStop);}
 
-        this.saveeeToFireTimeMs = mapLevel(5000, 500);
-        this.maxSaveeeCreationPeriodMs = mapLevel(4000, 1000);
+        this.saveeeToLosePlaceTimeMs = mapLevel(config.saveeeToLosePlaceTimeMs.max, config.saveeeToLosePlaceTimeMs.min);
+        const range = config.maxSaveeeCreationPeriodRangeMs;
+        this.maxSaveeeCreationPeriodMs = mapLevel(range.top, range.bottom);
     }
 
-    /** Adds a randomly-chosen saveee from a randomly-chosen category and starts it moving toward the fire */
+    /** Adds a randomly-chosen saveee from a randomly-chosen category and starts it moving toward the lose place */
     addSaveee() {
         const saveeeInfos = this.scene.saveeeInfoSubset();
         const saveeeKey = saveeeInfos[Phaser.Math.Between(0, saveeeInfos.length - 1)][0];
@@ -49,12 +48,13 @@ export default class Saveees {
         saveee.setFrame(frameIndex);
         this.incomingSaveees.add(saveee);
         saveee.setScale(2 / 3);
-        saveee.movementTween = this.moveToFire(saveee, this.saveeeToFireTimeMs, () => this.incomingSaveees.remove(saveee));
+        saveee.movementTween = this.moveToFire(saveee, this.saveeeToLosePlaceTimeMs,
+            () => this.incomingSaveees.remove(saveee));
     }
 
     /**
-     * Stops the first incoming saveee from its move toward the fire, and moves it to the selected target, and
-     * then if that is the wrong target, sends it to the fire.
+     * Stops the first incoming saveee from its move toward the lose place, and moves it to the selected target, and
+     * then if that is the wrong target, sends it to the lose place.
      * @param target the selected target
      */
     selectTarget(target) {
@@ -80,23 +80,24 @@ export default class Saveees {
         });
     }
 
-    moveToFire(saveee, duration=1000, onComplete) {
+    moveToFire(saveee, duration=1000, onCompleteCallback) {
+        const lpSprite = this.scene.losePlace.losePlaceSprite;
         return this.scene.tweens.add({
-            targets: [saveee], x: this.scene.fire.fireSprite.x, y: this.scene.fire.fireSprite.y, duration: duration,
+            targets: [saveee], x: lpSprite.x, y: lpSprite.y, duration: duration,
             onComplete: tween => {
-                if (onComplete) onComplete();
+                if (onCompleteCallback) onCompleteCallback();
                 this.burn(saveee)
             }
         });
     }
 
     burn(saveee) {
-        this.scene.fire.burn();
+        this.scene.losePlace.lose();
         this.scene.tweens.add({
             targets: [saveee], alpha: 0, duration: 500,
             onComplete: tween => {
                 saveee.destroy();
-                this.scene.text.addBurned();
+                this.scene.text.addLost();
             }
         });
     }
