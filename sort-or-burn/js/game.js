@@ -54,7 +54,7 @@ class MainScene extends Phaser.Scene {
 
     createBackground() {
         const s = this.add.sprite(0, 0, "background");
-        s.setAlpha(0.4).setScale(0.5).setOrigin(0);
+        s.setAlpha(0.4).setScale(1).setOrigin(0);
     }
 
     xPos(column) {
@@ -72,11 +72,32 @@ class MainScene extends Phaser.Scene {
 }
 
 window.onload = () => {
+    function resizeGame() {
+        const canvas = document.querySelector("canvas");
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const windowRatio = windowWidth / windowHeight;
+        const gameRatio = game.config.width / game.config.height;
+        if (windowRatio < gameRatio) {
+            canvas.style.width = windowWidth + "px";
+            canvas.style.height = (windowWidth / gameRatio) + "px";
+        } else {
+            canvas.style.width = (windowHeight * gameRatio) + "px";
+            canvas.style.height = windowHeight + "px";
+        }
+    }
+
+    const backgroundHeight = 1500;
+    const wh = 9/16;
     game = new Phaser.Game({
         type: Phaser.AUTO,
-        width: 700,
-        height: 700,
+        width: backgroundHeight * wh,
+        height: backgroundHeight,
         backgroundColor: config.backgroundColor,
         scene: [MainScene]
     });
+    window.focus();
+    resizeGame();
+    window.addEventListener("resize", resizeGame);
 };
+

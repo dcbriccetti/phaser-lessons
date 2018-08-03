@@ -13,13 +13,14 @@ export default class Targets {
         this.targetTexts = [];
         config.saveeeInfos.forEach((bookInfo, index) => {
             const xTarget = this.scene.xPos(index + 1);
-            const targetSprite = this.scene.add.sprite(xTarget, h * 0.86, 'target');
+            const targetSprite = this.scene.add.sprite(xTarget, 0, 'target');
             targetSprite.setScale(0.25);
+            targetSprite.setY(h - targetSprite.displayHeight / 2);
             const targetName = bookInfo[0];
             targetSprite.targetName = targetName;
             this.targetSprites.push(targetSprite);
-            this.targetTexts.push(this.scene.add.text(xTarget, h * 0.985, targetName,
-                {font: "16px sans-serif", color: "black"}).setOrigin(0.5));
+            this.targetTexts.push(this.scene.add.text(xTarget, h - 5, targetName,
+                {font: "16px sans-serif", color: "black"}).setOrigin(0.5, 1));
         });
         this.setNumTargets(this.scene.numTargets());
     }
