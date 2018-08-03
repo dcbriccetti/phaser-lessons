@@ -87,8 +87,8 @@ window.onload = () => {
         }
     }
 
-    const backgroundHeight = 1500;
-    const wh = 9/16;
+    const backgroundHeight = 750;
+    const wh = 3/4;
     game = new Phaser.Game({
         type: Phaser.AUTO,
         width: backgroundHeight * wh,
