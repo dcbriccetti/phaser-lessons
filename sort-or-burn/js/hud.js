@@ -1,6 +1,6 @@
 import {config} from './config.js'
 
-export default class Text {
+export default class Hud {
     constructor(width, scene) {
         this.width = width;
         this.scene = scene;

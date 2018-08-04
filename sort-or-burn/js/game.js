@@ -5,7 +5,7 @@
 import LosePlace from './losePlace.js';
 import Targets from './targets.js';
 import Saveees from './saveees.js';
-import Text from './text.js';
+import Hud from './hud.js';
 import {config, a} from './config.js'
 
 let game;
@@ -17,7 +17,7 @@ class MainScene extends Phaser.Scene {
         this.level = 1;
         this.targets = new Targets(cfg.height, this);
         this.saveees = new Saveees(this);
-        this.text = new Text(cfg.width, this);
+        this.text = new Hud(cfg.width, this);
         this.load.image("background",  a(config.background.image));
     }
 
