@@ -14,6 +14,8 @@ export default class Targets {
         config.saveeeInfos.forEach((bookInfo, index) => {
             const xTarget = this.scene.xPos(index + 1);
             const targetSprite = this.scene.add.sprite(xTarget, 0, 'target');
+            targetSprite.setInteractive();
+            targetSprite.on('pointerdown', () => {if (this.pushListener) this.pushListener(targetSprite);});
             targetSprite.setScale(0.25);
             targetSprite.setY(h - targetSprite.displayHeight / 2);
             const targetName = bookInfo[0];
@@ -31,8 +33,5 @@ export default class Targets {
         }
     }
 
-    closest(x, y) {
-        function distanceTo(targetSprite) {return Phaser.Math.Distance.Between(x, y, targetSprite.x, targetSprite.y);}
-        return this.targetSprites.reduce((a, b) => distanceTo(a) < distanceTo(b) ? a : b);
-    }
+    setPushListener(listener) {this.pushListener = listener;}
 }

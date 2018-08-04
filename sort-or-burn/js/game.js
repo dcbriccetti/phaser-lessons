@@ -13,7 +13,6 @@ let game;
 class MainScene extends Phaser.Scene {
     preload() {
         const cfg = game.config;
-        console.log(cfg);
         this.losePlace = new LosePlace(cfg.width, cfg.height, this);
         this.level = 1;
         this.targets = new Targets(cfg.height, this);
@@ -25,7 +24,7 @@ class MainScene extends Phaser.Scene {
     create() {
         this.createBackground();
         [this.text, this.targets, this.losePlace].forEach(m => m.create());
-        this.input.on("pointerdown", event => this.saveees.selectTarget(this.targets.closest(event.x, event.y)), this);
+        this.targets.setPushListener(target => this.saveees.selectTarget(target));
         this.input.keyboard.on('keydown', event => {
             const keyNum = parseInt(event.key);
             if (keyNum > 0 && keyNum <= this.numTargets())
