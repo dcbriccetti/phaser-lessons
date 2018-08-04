@@ -1,6 +1,6 @@
 export const config = {
     title: "Save the Animals",
-    introduction: "Save animals by sending them to the right\nteleporter before they perish. Use mouse/touch\nor number keys.",
+    introduction: "Save animals by sending them to the right teleporter before they perish. Use mouse/touch or number keys.",
     saveeeInfos: [
         ["Monkeys", "monkeys.jpg", 200, 150],
         ["Birds",   "birds.jpg",   200, 150],

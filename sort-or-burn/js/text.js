@@ -10,16 +10,26 @@ export default class Text {
 
     create() {
         const textLeft = this.width / 3;
-        this.scene.add.text(textLeft, 50, config.title, {font: "50px sans-serif", color: "black"}).setOrigin(0, 0.5);
-        this.scene.add.text(textLeft, 120, config.introduction,
-            {font: "20px sans-serif", color: "black"}).setOrigin(0, 0.5);
-        this.sortedText = this.scene.add.text(textLeft, 220, "",
-            {font: "30px monospace", color: "black"}).setOrigin(0, 0.5);
+        this.scene.add.text(textLeft, 50, config.title, {font: 'bold 40px Arial', color: 'black'}).setOrigin(0, 0.5);
+        this.scene.make.text({
+            x: textLeft, y: 150,
+            text: config.introduction,
+            origin: {x: 0, y: 0.5},
+            style: {
+                font: '25px Arial',
+                fill: 'black',
+                wordWrap: {width: 370}
+            }
+        });
+        this.scene.add.text(textLeft, 270, ['Level:', 'Saved:', 'Lost:'],
+            {font: 'bold 25px Arial', color: 'black'}).setOrigin(0, 0.5);
+        this.numbers = this.scene.add.text(textLeft + 100, 270, '',
+            {font: 'bold 25px Arial', color: 'black', align: 'right'}).setOrigin(0, 0.5);
         this.update();
     }
 
     update() {
-        this.sortedText.setText(`Level: ${this.level}\nSaved: ${this.numSaved}\nLost:  ${this.numLost}`);
+        this.numbers.setText([this.level, this.numSaved, this.numLost]);
     }
 
     addSorted() {
