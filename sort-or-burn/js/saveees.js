@@ -70,7 +70,7 @@ export default class Saveees {
         this.scene.tweens.add({
             targets: [saveee], x: target.x, y: target.y, duration: 1000,
             onComplete: tween => {
-                if (saveee.texture.key === target.targetName) {
+                if (saveee.texture.key === target.getData('targetName')) {
                     this.scene.text.addSorted();
                     saveee.destroy();
                 } else {
