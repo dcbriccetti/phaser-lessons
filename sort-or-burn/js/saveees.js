@@ -69,7 +69,7 @@ export default class Saveees {
 
         this.scene.tweens.add({
             targets: [saveee], x: target.x, y: target.y, duration: 1000,
-            onComplete: tween => {
+            onComplete: () => {
                 if (saveee.texture.key === target.getData('targetName')) {
                     this.scene.text.addSorted();
                     saveee.destroy();
@@ -84,7 +84,7 @@ export default class Saveees {
         const lpSprite = this.scene.losePlace.losePlaceSprite;
         return this.scene.tweens.add({
             targets: [saveee], x: lpSprite.x, y: lpSprite.y, duration: duration,
-            onComplete: tween => {
+            onComplete: () => {
                 if (onCompleteCallback) onCompleteCallback();
                 this.burn(saveee)
             }
@@ -95,7 +95,7 @@ export default class Saveees {
         this.scene.losePlace.lose();
         this.scene.tweens.add({
             targets: [saveee], alpha: 0, duration: 500,
-            onComplete: tween => {
+            onComplete: () => {
                 saveee.destroy();
                 this.scene.text.addLost();
             }
