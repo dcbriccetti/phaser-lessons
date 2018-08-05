@@ -1,7 +1,7 @@
 window.onload = () => {
     class MainScene extends Phaser.Scene {
         preload() {
-            this.load.image('player', 'assets/' + 'eagle.jpg');
+            this.load.image('player', 'assets/' + 'eagle.png');
         }
 
         create() {
