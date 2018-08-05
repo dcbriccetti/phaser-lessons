@@ -3,8 +3,9 @@
 class MainScene extends Phaser.Scene {
     preload() {
         this.score = 0;
-        'sky platform star bomb'.split(' ').
+        'platform star bomb'.split(' ').
             forEach(name => this.load.image(name, `assets/${name}.png`));
+        this.load.image('sky', 'assets/sky.jpg');
         this.load.spritesheet('dude', 'assets/dude.png', {frameWidth: 32, frameHeight: 48});
     }
 
@@ -18,7 +19,8 @@ class MainScene extends Phaser.Scene {
         const bombs = this.bombs = this.physics.add.group();
         this.scoreText = this.add.text(16, 16, '', {fontSize: '32px', fill: '#000'});
         [player, stars, bombs].forEach(obj => this.physics.add.collider(obj, this.platforms));
-        this.physics.add.collider(player, stars, this.collectStar, null, this);
+        this.physics.add.collider(stars, stars);
+        this.physics.add.overlap(player, stars, this.collectStar, null, this);
         this.physics.add.collider(player, bombs, this.playerHitBomb, null, this);
         this.cursors = this.input.keyboard.createCursorKeys();
         this.advanceLevel();
@@ -40,7 +42,7 @@ class MainScene extends Phaser.Scene {
 
     createPlatforms() {
         this.platforms = this.physics.add.staticGroup();
-        this.platforms.create(400, 568, 'platform').setScale(2).refreshBody(); // The ground
+        this.platforms.create(400, 615, 'platform').setScale(2).refreshBody().setAlpha(0); // The ground
         [[600, 400], [50, 250], [750, 220]].forEach(xy => this.platforms.create(xy[0], xy[1], 'platform'));
     }
 
@@ -60,9 +62,9 @@ class MainScene extends Phaser.Scene {
         }
 
         if (cursors.up.isDown && player.body.touching.down) {
-            player.setVelocityY(-330);
+            player.setVelocityY(-350);
         } else if (cursors.down.isDown) {
-            player.setVelocityY(330);
+            player.setVelocityY(350);
         }
     }
 
