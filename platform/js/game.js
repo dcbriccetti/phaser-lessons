@@ -3,11 +3,8 @@
 class MainScene extends Phaser.Scene {
     preload() {
         this.score = 0;
-        this.gameOver = false;
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('platform', 'assets/platform.png');
-        this.load.image('star', 'assets/star.png');
-        this.load.image('bomb', 'assets/bomb.png');
+        'sky platform star bomb'.split(' ').
+            forEach(name => this.load.image(name, `assets/${name}.png`));
         this.load.spritesheet('dude', 'assets/dude.png', {frameWidth: 32, frameHeight: 48});
     }
 
@@ -85,7 +82,7 @@ class MainScene extends Phaser.Scene {
     advanceLevel() {
         ++this.level;
         this.stars.children.iterate(star => {
-            star.enableBody(true, star.x, 0, true, true);
+            star.enableBody(true, Phaser.Math.Between(0, game.config.width), 0, true, true);
             star.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
             star.setCollideWorldBounds(true);
             star.setVelocity(Phaser.Math.Between(-40, 40), 0);
@@ -123,7 +120,7 @@ class MainScene extends Phaser.Scene {
     }
 }
 
-new Phaser.Game({
+const game = new Phaser.Game({
     type: Phaser.AUTO,
     width: 800,
     height: 600,
