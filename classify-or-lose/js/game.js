@@ -23,7 +23,7 @@ class MainScene extends Phaser.Scene {
 
     create() {
         this.createBackground();
-        [this.text, this.targets, this.losePlace].forEach(m => m.create());
+        [this.text, this.targets, this.losePlace, this.saveees].forEach(m => m.create());
         this.targets.setPushListener(target => this.saveees.selectTarget(target));
         this.input.keyboard.on('keydown', event => {
             const keyNum = parseInt(event.key);

@@ -6,11 +6,14 @@ export default class Saveees {
         this.scene = scene;
         this.running = true;
         this.incomingSaveees = scene.add.group();
-        this.createSaveeeAfterDelay(1000);
         this.setLevel(1);
 
         config.saveeeInfos.forEach(si =>
             scene.load.spritesheet(si[0], a(si[1]), {frameWidth: si[2], frameHeight: si[3]}));
+    }
+
+    create() {
+        this.createSaveeeAfterDelay(1000);
     }
 
     createSaveeeAfterDelay(delay) {
@@ -48,7 +51,7 @@ export default class Saveees {
         saveee.setFrame(frameIndex);
         this.incomingSaveees.add(saveee);
         saveee.setScale(2 / 3);
-        saveee.movementTween = this.moveToFire(saveee, this.saveeeToLosePlaceTimeMs,
+        saveee.movementTween = this.moveToLosePlace(saveee, this.saveeeToLosePlaceTimeMs,
             () => this.incomingSaveees.remove(saveee));
     }
 
@@ -74,24 +77,24 @@ export default class Saveees {
                     this.scene.text.addSorted();
                     saveee.destroy();
                 } else {
-                    this.moveToFire(saveee);
+                    this.moveToLosePlace(saveee);
                 }
             }
         });
     }
 
-    moveToFire(saveee, duration=1000, onCompleteCallback) {
+    moveToLosePlace(saveee, duration=1000, onCompleteCallback) {
         const lpSprite = this.scene.losePlace.losePlaceSprite;
         return this.scene.tweens.add({
             targets: [saveee], x: lpSprite.x, y: lpSprite.y, duration: duration,
             onComplete: () => {
                 if (onCompleteCallback) onCompleteCallback();
-                this.burn(saveee)
+                this.lose(saveee)
             }
         });
     }
 
-    burn(saveee) {
+    lose(saveee) {
         this.scene.losePlace.lose();
         this.scene.tweens.add({
             targets: [saveee], alpha: 0, duration: 500,
