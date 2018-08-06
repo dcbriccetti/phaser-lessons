@@ -1,6 +1,6 @@
 # Graphical Web Game with JavaScript and Phaser
 
-## Short Link to This Page: [bit.ly/db-phaser](bit.ly/db-phaser)
+## Short Link to This Page: [bit.ly/db-phaser](https://bit.ly/db-phaser)
 
 ## Resources
 - [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
@@ -15,15 +15,18 @@
 ### Goals
 - Know what JavaScript and Phaser are
 - Understand and be able to modify some simple Phaser programs
-- Be able to create a small game of your own design
+- Be able to create small games of your own design
 
 ### Introduction
 #### [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 #### [Phaser](http://phaser.io)
 
 ### Activities
-#### Walk through and modify some simple Phaser programs
-##### Using repl.it
+
+#### Using repl.it
+Creating an account. All your repls are public.
+
+#### Walk through and modify some Phaser programs
 - [Hello, World](https://repl.it/@dcbriccetti/hello)
     - Change the greeting
     - Change the text size and color
