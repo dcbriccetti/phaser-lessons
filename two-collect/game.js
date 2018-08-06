@@ -8,12 +8,13 @@ window.onload = () => {
             this.cat = this.physics.add.sprite(100, 100, 'cat');
             this.monkey = this.physics.add.sprite(game.config.width - 100, 100, 'monkey');
             this.diamonds = this.physics.add.group();
-            this.time.addEvent({delay: 5000, loop: true, callback: () => this.addDiamond()});
+            this.time.addEvent({delay: 3000, loop: true, callback: () => this.addDiamond()});
             this.physics.add.collider(this.diamonds, this.diamonds);
             this.cursors = this.input.keyboard.createCursorKeys();
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-            [this.cat, this.monkey].forEach(p =>
-                this.physics.add.overlap(p, this.diamonds, this.collect, undefined, this));
+            [this.cat, this.monkey].forEach(player => {
+                this.physics.add.overlap(player, this.diamonds, this.collect, undefined, this);
+            });
             this.numbers = this.add.text(game.config.width / 2, 20, '',
                 {font: 'bold 25px Arial', color: 'black', align: 'right'}).setOrigin(0.5, 0);
             this.monkeyScore = 0;
@@ -34,7 +35,7 @@ window.onload = () => {
 
         addDiamond() {
             const diamond = this.physics.add.sprite(Phaser.Math.Between(50, game.config.width - 50),
-                Phaser.Math.Between(50, game.config.height - 50), "diamond");
+                Phaser.Math.Between(50, game.config.height - 50), 'diamond');
             this.diamonds.add(diamond);
             diamond.setCollideWorldBounds(true);
         }
