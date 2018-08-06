@@ -38,6 +38,8 @@ Creating an account. All your repls are public.
     - Make the character move in all four directions
     - Change the movement speed
     - Experiment with different drag values
+- [Two Collect](https://repl.it/@dcbriccetti/two-collect)
+    - Finish the game, for two players
 - [Bounce](https://repl.it/@dcbriccetti/bounce)
     - Experiment with different values for gravity, drag and bounce
     - Replace the graphic with one that you draw or find, considering appropriate use
