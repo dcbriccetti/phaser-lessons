@@ -8,7 +8,7 @@ window.onload = () => {
             this.cat = this.physics.add.sprite(100, 100, 'cat');
             this.monkey = this.physics.add.sprite(game.config.width - 100, 100, 'monkey');
             this.diamonds = this.physics.add.group();
-            this.time.addEvent({delay: 3000, loop: true, callback: () => this.addDiamond()});
+            this.time.addEvent({delay: 2000, loop: true, callback: () => this.addDiamond()});
             this.physics.add.collider(this.diamonds, this.diamonds);
             this.cursors = this.input.keyboard.createCursorKeys();
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -25,10 +25,10 @@ window.onload = () => {
             this.cat.setVelocityY(0);
             this.monkey.setVelocityY(0);
 
-            if (this.cursors.left.isDown)   this.monkey.setX(this.monkey.x - 3);
-            if (this.cursors.right.isDown)  this.monkey.setX(this.monkey.x + 3);
-            if (this.cursors.up.isDown)     this.monkey.setY(this.monkey.y - 3);
-            if (this.cursors.down.isDown)   this.monkey.setY(this.monkey.y + 3);
+            if (this.cursors.left.isDown)   this.monkey.setX(this.monkey.x - 5);
+            if (this.cursors.right.isDown)  this.monkey.setX(this.monkey.x + 5);
+            if (this.cursors.up.isDown)     this.monkey.setY(this.monkey.y - 5);
+            if (this.cursors.down.isDown)   this.monkey.setY(this.monkey.y + 5);
 
             if (this.keyS.isDown)   this.cat.setY(this.cat.y + 3);
         }
