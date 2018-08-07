@@ -7,10 +7,14 @@
 - [Phaser 3 Documentation](https://photonstorm.github.io/phaser3-docs/)
 - [Phaser 3 Examples](https://labs.phaser.io/index.html)
 - [Piskel Sprite Editor](https://www.piskelapp.com/)
-- [Krita](https://krita.org/en/) painting program (for your own computer)
-- [OpenGameArt](https://opengameart.org/)
+- [Krita](https://krita.org/en/) painting program (for installing on
+your own computer)
+- [OpenGameArt](https://opengameart.org/) free game art
 - Dave’s [phaser-learning](https://github.com/dcbriccetti/phaser-lessons/) Github repository
+- [Dave’s YouTube Channel](www.youtube.com/dcbriccetti)
 - More about [Dave’s teaching](https://davebsoft.com/programming-for-kids/)
+- [Dave’s email](mailto:daveb@davebsoft.com)
+- Lafayette Library and Learning Center’s [event calendar](www.lllcf.org/program-calendar/)
 
 ### Goals
 - Know what JavaScript and Phaser are
@@ -22,8 +26,23 @@
 #### Getting to Know You
 Let’s look at your names, ages, what grades you’re in, and
 your programming experience.
+### Class Format
+Our classes consist of:
+- Instruction
+- Exercises, where you explore and modify programs
+- Low-key, interactive quizzes (not for a grade)
+- Creative project work, where you apply what you’ve learned in your own way
+- Show and tell, where you, the assistants and the instructor share interesting creations
+- A five-minute break near the middle
+
 #### [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+Take 60 seconds and skim the Wikipedia article at the link above
+to find out about it.
+
 #### [Phaser](http://phaser.io)
+Take 60 seconds and skim the Phaser web page to get a feel for
+what it is and what it can do.
+
 #### Quick demo of “Platform” and “Classify or Lose”
 These Phaser programs are examples of what we are working towards.
 
@@ -41,62 +60,61 @@ the repl (a “fork”), which then belongs to you.
 This short example shows the code required to run Phaser from an
 HTML page, and present the greeting, “Hello, World”. (Read about [the
 tradition](https://en.wikipedia.org/wiki/%22Hello,_World!%22_program)
-if you like.) Try changing:
-- the greeting
-- the text size and color
-- the background color
+if you like.) Change:
+1. the greeting
+1. the text size and color
+1. the background color
 
 ##### [Hello, World with a Sprite](https://repl.it/@dcbriccetti/hello-sprite)
 Instead of using text to display “Hello, World”,
 this example displays a rotating sprite containing the text.
-- Make the sprite rotate faster
-- Reverse the rotation direction
+1. Make the sprite rotate faster
+1. Reverse the rotation direction
 
 ##### [Moving Character](https://repl.it/@dcbriccetti/moving-character)
 This program has a pretty eagle flying in a blue sky. It’s programmed to
 move right when you press the right arrow.
-- Make the character move in all four directions
-- Change the movement speed
-- Experiment with different drag values
+1. Make the character move in all four directions
+1. Change the movement speed
+1. Experiment with different drag values
 
 ##### [Two Collect](https://repl.it/@dcbriccetti/two-collect)
 This game is about a cat and a monkey that collect diamonds. Only
 the monkey moves in all four directions and shows a score.
-- Let the cat move all four ways
-- Show the cat’s score
-- Optional:
-    - Have pieces of coal, or some other enemy sprite randomly
+1. Let the cat move all four ways
+1. Show the cat’s score
+1. (Optional) Have pieces of coal, or some other enemy sprite randomly
     appear and take points away when collected by one of the characters
 
 ##### [Bounce](https://repl.it/@dcbriccetti/bounce)
 A tennis ball drops and bounces and rolls somewhat realistically, using
 the “Arcade” physics engine of Phaser.
-- Experiment with different values for gravity, drag and bounce
-- Replace the graphic with one that you draw or find, considering appropriate use
+1. Experiment with different values for gravity, drag and bounce
+1. Replace the graphic with one that you draw or find, considering appropriate use
     - Consider using [Creative Commons Search](https://search.creativecommons.org/)
 
 ##### [Multi-Bounce](https://repl.it/@dcbriccetti/multi-bounce)
 Multiple tennis balls drop and interact with each other. Eventually,
 each one fades away and disappears.
-- Change the ball-generation rate
-- Change the ball spawn position
-- Change the range of random X axis velocities
-- Change the fade-out time (look for “alpha”)
-- Change the number of balls that can exist
-- Change the way the balls spin (angular velocity)
-- Have the ball sizes be random
+1. Change the ball-generation rate
+1. Change the ball spawn position
+1. Change the range of random X axis velocities
+1. Change the fade-out time (look for “alpha”)
+1. Change the number of balls that can exist
+1. Change the way the balls spin (angular velocity)
+1. Have the ball sizes be random
 
 ##### [Platform](https://repl.it/@dcbriccetti/platform)
 This game is adapted from [a Phaser tutorial](https://phaser.io/tutorials/making-your-first-phaser-3-game), and improved
 with modern JavaScript features and other changes. Collect the stars
 and avoid the bombs.
-- Change how high the character jumps
-- Add another platform
-- Let the character leave the screen
-- Allow jumping even when the character is not on a surface
+1. Change how high the character jumps
+1. Add another platform
+1. Let the character leave the screen
+1. Allow jumping even when the character is not on a surface
 
 ##### [Classify or Lose (aka Save the Animals)](https://repl.it/@dcbriccetti/classify-or-lose)
 This game, which has you save animals by classifying them as monkeys,
 birds or cats, is written in such a way that the theme can be changed
 by bringing in new graphics and sounds.
-- Change the theme (to a happy one?)
+1. Change the theme (to a happy one?)
