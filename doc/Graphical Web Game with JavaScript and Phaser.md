@@ -18,13 +18,24 @@
 - Be able to create small games of your own design
 
 ### Introduction
+#### Your Teacher and Assistants
+#### Getting to Know You
+Let’s look at your names, ages, what grades you’re in, and
+your programming experience.
 #### [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 #### [Phaser](http://phaser.io)
-
-### Lessons and Exercises
+#### Quick demo of “Platform” and “Classify or Lose”
+These Phaser programs are examples of what we are working towards.
 
 #### Using repl.it
-Creating an account. All your repls are public.
+Many of the following links take you to a software
+development site called repl.it. If you create an account you can save
+your work there. All of your “repls” are visible to the public (if
+they know where to look and care to). When you click on one of these
+links and then change any of the files, repl.it makes a copy of
+the repl (a “fork”), which then belongs to you.
+
+### Lectures and Exercises
 
 ##### [Hello, World](https://repl.it/@dcbriccetti/hello)
 This short example shows the code required to run Phaser from an
