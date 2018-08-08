@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html>
-	<head>
-        <title>Timer</title>
-        <script src="//cdn.jsdelivr.net/npm/phaser@3.11/dist/phaser.min.js"></script>
-        <script src = "game.js"></script>
-    </head>
-	<body>
-	</body>
+<head>
+    <title>Timer</title>
+    <link href="main.css" rel="stylesheet"/>
+</head>
+<body>
+<div id="message-box">
+    <input type="text" id="message"><br/>
+    <span id="prompt">Seconds left: </span><input type="number" id="seconds">
+</div>
+<script>
+    function update() {
+        const seconds = document.getElementById('seconds');
+        if (document.activeElement !== seconds)
+            seconds.value = seconds.value > 0 ? seconds.value - 1  : '';
+        window.setTimeout(update, 1000);
+    }
+    document.getElementById('message').focus();
+    update();
+</script>
+</body>
 </html>

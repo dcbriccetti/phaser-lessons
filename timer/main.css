@@ -1,0 +1,25 @@
+#message-box {
+    padding: .3em;
+    color: white;
+    background-color: #4127CC;
+    font-size: 300%;
+}
+
+input {
+    border-width: 0;
+    font-size: 100%;
+    background-color: #4127CC;
+    color: white;
+}
+
+#message {
+    width: 100%;
+}
+
+#prompt {
+    font-size: 70%;
+}
+
+#seconds {
+    width: 4em;
+}
