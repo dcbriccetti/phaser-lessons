@@ -118,3 +118,15 @@ This game, which has you save animals by classifying them as monkeys,
 birds or cats, is written in such a way that the theme can be changed
 by bringing in new graphics and sounds.
 1. Change the theme (to a happy one?)
+
+### Make Your Own Game
+You now have examples for doing many things with a Phaser game. Now it’s
+time to make your own game. Follow these steps, if you like.
+1. Think of a theme
+1. Add a background
+1. Make the player character
+    1. Find an existing spritesheet or make your own (perhaps with
+    Piskel (see above)
+1. Make your character appear in the game
+1. Have it move around with cursor or WASD keys, if you like
+1. Give it an animation (jumping, perhaps)
