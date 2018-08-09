@@ -122,6 +122,10 @@ by bringing in new graphics and sounds.
 ##### [Very Simple Animation](https://repl.it/@dcbriccetti/very-simple-animation)
 Here is a very simple animation example.
 
+##### [Accelerate with Drag](https://repl.it/@dcbriccetti/drag-accel)
+This program lets you play with acceleration, drag and velocity. And
+sound!
+
 ### Make Your Own Game
 You now have examples for doing many things with a Phaser game. Now it’s
 time to make your own game. Follow these steps, if you like.
