@@ -2,6 +2,8 @@ window.onload = () => {
     class MainScene extends Phaser.Scene {
         preload() {
             'cat monkey diamond'.split(' ').forEach(name => this.load.image(name, name + '.png'));
+            this.load.audio('small-bell', 'small-bell.wav');
+            this.load.audio('small-bell-higher', 'small-bell-higher.wav');
         }
 
         create() {
@@ -9,6 +11,8 @@ window.onload = () => {
             this.monkey = this.physics.add.sprite(game.config.width - 100, 100, 'monkey');
             this.diamonds = this.physics.add.group();
             this.time.addEvent({delay: 2000, loop: true, callback: () => this.addDiamond()});
+            this.catCollectSound = this.sound.add('small-bell', {loop: false});
+            this.monkeyCollectSound = this.sound.add('small-bell-higher', {loop: false});
             this.physics.add.collider(this.diamonds, this.diamonds);
             this.cursors = this.input.keyboard.createCursorKeys();
             this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
@@ -41,7 +45,10 @@ window.onload = () => {
         }
 
         collect(player, diamond) {
-            if (player === this.monkey) ++this.monkeyScore;
+            if (player === this.monkey) {
+                ++this.monkeyScore;
+                this.monkeyCollectSound.play();
+            }
             diamond.destroy();
             this.numbers.setText(`Monkey: ${this.monkeyScore}`);
         }
