@@ -10,6 +10,8 @@
 - [Krita](https://krita.org/en/) painting program (for installing on
 your own computer)
 - [OpenGameArt](https://opengameart.org/) free game art
+- [Freesound](https://freesound.org/) database of
+Creative Commons–licensed sounds
 - Dave’s [phaser-learning](https://github.com/dcbriccetti/phaser-lessons/) Github repository
 - [Dave’s YouTube Channel](www.youtube.com/dcbriccetti)
 - More about [Dave’s teaching](https://davebsoft.com/programming-for-kids/)
@@ -82,6 +84,7 @@ move right when you press the right arrow.
 This game is about a cat and a monkey that collect diamonds. Only
 the monkey moves in all four directions and shows a score.
 1. Let the cat move all four ways
+1. Have the cat play its sound when it collects a diamond
 1. Show the cat’s score
 1. (Optional) Have pieces of coal, or some other enemy sprite randomly
     appear and take points away when collected by one of the characters
@@ -124,7 +127,11 @@ Here is a very simple animation example.
 
 ##### [Accelerate with Drag](https://repl.it/@dcbriccetti/drag-accel)
 This program lets you play with acceleration, drag and velocity. And
-sound!
+sound created with an oscillator.
+
+#### [Play Sound](https://repl.it/@dcbriccetti/play-sound)
+Plays a sound. From this example, you should be able to add sounds to
+your own programs.
 
 ### Make Your Own Game
 You now have examples for doing many things with a Phaser game. Now it’s
